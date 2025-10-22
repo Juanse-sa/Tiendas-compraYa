@@ -1,34 +1,29 @@
 import express from "express";
-import multer from "multer";
+import cors from "cors";
+import morgan from "morgan";
 import path from "path";
-import fs from "fs";
-import {
-  getProducts,
-  createProduct,
-  getProductById,
-  updateProduct,
-  deleteProduct,
-} from "../controllers/product.controller.js";
+import { fileURLToPath } from "url";
+import dotenv from "dotenv";
 
-const router = express.Router();
+// Cargar .env desde la raíz del servicio
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.resolve(__dirname, "..", ".env") });
 
-const uploadDir = "uploads";
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+// Importar rutas
+import productRoutes from "./src/routes/product.routes.js";
+import orderRoutes from "./src/routes/order.routes.js";
 
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadDir),
-  filename: (_req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(null, unique + path.extname(file.originalname));
-  },
+const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(morgan("dev"));
+
+// Rutas principales
+app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
+
+const PORT = Number(process.env.PORT || 8080);
+
+app.listen(PORT, () => {
+  console.log(`🛒 catalogo-service corriendo en el puerto :${PORT}`);
 });
-
-const upload = multer({ storage });
-
-router.get("/", getProducts);
-router.get("/:id", getProductById);
-router.post("/", upload.single("imagen"), createProduct);
-router.put("/:id", upload.single("imagen"), updateProduct);
-router.delete("/:id", deleteProduct);
-
-export default router;
