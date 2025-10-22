@@ -1,18 +1,20 @@
-# Imagen base oficial
+# Imagen base oficial de Node
 FROM node:18
 
-# Directorio de trabajo
+# Directorio de trabajo dentro del contenedor
 WORKDIR /usr/src/app
 
-# Copiar dependencias
+# Copiar los archivos de configuración
 COPY package*.json ./
+
+# Instalar dependencias
 RUN npm install
 
-# Copiar el resto del código
+# Copiar el resto del código fuente
 COPY . .
 
-# Exponer el puerto que Cloud Run usará
+# Exponer el puerto que Cloud Run usa
 EXPOSE 8080
 
-# Comando para iniciar el servicio
+# Comando para iniciar la app
 CMD ["npm", "start"]
