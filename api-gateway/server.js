@@ -300,5 +300,8 @@ app.use("/api/wallet",    createProxyMiddleware({ target: S.wallet,    ...proxyC
 
 // ===== Start
 const listenPort = Number(process.env.PORT || process.env.GATEWAY_PORT || 8080);
-app.listen(listenPort, () => console.log(`🌐 Gateway escuchando en el puerto ${listenPort}`));
+app.listen(listenPort, "0.0.0.0", () => {
+  console.log(`🌐 Gateway escuchando en el puerto ${listenPort}`);
+});
+
 
