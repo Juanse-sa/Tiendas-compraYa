@@ -24,5 +24,6 @@ app.get("/api/wallet", (req, res) => {
   res.json({ coupons: WALLET.get(user) || [] });
 });
 
-const PORT = Number(process.env.WALLET_PORT || 8080);
+const PORT = Number(process.env.PORT || 8080);
+
 app.listen(PORT, () => console.log(`🎟️ wallet-service en :${PORT}`));
