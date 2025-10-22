@@ -8,7 +8,7 @@ const app = express(); app.use(cors()); app.use(express.json()); app.use(morgan(
 
 const CARTS = new Map();
 const getUser = (req) => req.header("x-user") || "guest";
-const PRICING = `http://localhost:${Number(process.env.PRICING_PORT || 4003)}`;
+const PRICING = `http://localhost:${Number(process.env.PRICING_PORT || 8080)}`;
 
 app.post("/api/cart/items", async (req, res) => {
   const { sku, qty } = req.body;
@@ -44,5 +44,5 @@ app.post("/api/cart/apply-coupon", async (req, res) => {
   res.json(cart);
 });
 
-const PORT = Number(process.env.CART_PORT || 4004);
+const PORT = Number(process.env.CART_PORT || 8080);
 app.listen(PORT, () => console.log(`🛒 cart-service en :${PORT}`));
