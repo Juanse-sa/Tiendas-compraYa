@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 // ======== CONFIG DB (acepta tu esquema MYSQL_*) ========
 const DB = {
   host: process.env.MYSQL_HOST || "127.0.0.1",
-  port: Number(process.env.MYSQL_PORT || 3306),
+  port: Number(process.env.MYSQL_PORT || 8080),
   user: process.env.MYSQL_USER || "root",
   password: process.env.MYSQL_PASSWORD || "",
   database: process.env.MYSQL_DATABASE || "retailBD",
@@ -146,7 +146,7 @@ app.get("/api/catalog", async (_req, res) => {
 app.get("/catalog", (req, res) => res.json(mockProducts));
 app.get("/productos", (req, res) => res.json(mockProducts));
 
-const PORT = Number(process.env.PORT || 4000);
+const PORT = Number(process.env.PORT || 8080);
 app.listen(PORT, () => console.log(`📦 Catalog en :${PORT}`));
 
 // Inicializa
