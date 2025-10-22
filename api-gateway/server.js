@@ -54,12 +54,12 @@ const {
 
 const localUrl = (p, def) => `http://localhost:${Number(p || def)}`;
 const S = {
-  catalog:  CATALOG_URL   || localUrl(CATALOG_PORT,   4000),
-  inventory:INVENTORY_URL || localUrl(INVENTORY_PORT, 4002),
-  pricing:  PRICING_URL   || localUrl(PRICING_PORT,   4003),
-  cart:     CART_URL      || localUrl(CART_PORT,      4004),
-  payments: PAYMENTS_URL  || localUrl(PAYMENTS_PORT,  4005),
-  wallet:   WALLET_URL    || localUrl(WALLET_PORT,    4006),
+  catalog:  CATALOG_URL   || localUrl(CATALOG_PORT,   8080),
+  inventory:INVENTORY_URL || localUrl(INVENTORY_PORT, 8080),
+  pricing:  PRICING_URL   || localUrl(PRICING_PORT,   8080),
+  cart:     CART_URL      || localUrl(CART_PORT,      8080),
+  payments: PAYMENTS_URL  || localUrl(PAYMENTS_PORT,  8080),
+  wallet:   WALLET_URL    || localUrl(WALLET_PORT,    8080),
 };
 console.log("Gateway targets:", S);
 console.log("Catalog base paths:", { CATALOG_BASE_PATH, CATALOG_UPLOADS_PATH });
