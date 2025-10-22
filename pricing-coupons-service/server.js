@@ -23,5 +23,6 @@ app.post("/api/pricing/coupons/validate", (req, res) => {
   res.json({ valid:true, discount, final: Math.max(0, itemsTotal - discount) });
 });
 
-const PORT = Number(process.env.PRICING_PORT || 8080);
+const PORT = Number(process.env.PORT || 8080);
+
 app.listen(PORT, () => console.log(`💰 pricing-coupons-service en :${PORT}`));
