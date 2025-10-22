@@ -1,0 +1,34 @@
+# cloudbuild.yaml
+# Archivo de configuración de Cloud Build para desplegar tu API en Cloud Run
+
+steps:
+  # 1️⃣ Construir la imagen Docker desde tu código
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/compraya-service', '.']
+
+  # 2️⃣ Subir la imagen al registro de contenedores (Container Registry o Artifact Registry)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/compraya-service']
+
+  # 3️⃣ Desplegar la imagen en Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'compraya-service'       # 👈 Nombre del servicio Cloud Run
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/compraya-service'
+      - '--region'
+      - 'us-central1'            # 👈 Cambia a tu región si usas otra (por ej. southamerica-west1)
+      - '--platform'
+      - 'managed'
+      - '--allow-unauthenticated'
+
+# 4️⃣ Registrar la imagen final
+images:
+  - 'gcr.io/$PROJECT_ID/compraya-service'
+
+# 5️⃣ Configuración opcional: guardar logs solo en Cloud Logging
+options:
+  logging: CLOUD_LOGGING_ONLY
