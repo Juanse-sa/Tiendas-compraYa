@@ -22,7 +22,7 @@ const sequelize = new Sequelize(
   process.env.MYSQL_PASSWORD,
   {
     host: process.env.MYSQL_HOST,
-    port: Number(process.env.MYSQL_PORT || 3306),
+    port: Number(process.env.MYSQL_PORT || 8080),
     dialect: "mysql",
     logging: false,
   }
@@ -85,7 +85,7 @@ app.post("/api/inventory/confirm", async (req, res) => {
   res.json({ ok: true });
 });
 
-const PORT = Number(process.env.INVENTORY_PORT || 4002);
+const PORT = Number(process.env.INVENTORY_PORT || 8080);
 
 (async () => {
   try {
