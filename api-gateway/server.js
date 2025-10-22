@@ -299,5 +299,6 @@ app.use("/api/payments",  createProxyMiddleware({ target: S.payments,  ...proxyC
 app.use("/api/wallet",    createProxyMiddleware({ target: S.wallet,    ...proxyCommon }));
 
 // ===== Start
-const listenPort = Number(PORT || GATEWAY_PORT || 3000);
-app.listen(listenPort, () => console.log(`🚪 API Gateway en http://localhost:${listenPort}`));
+const listenPort = Number(process.env.PORT || process.env.GATEWAY_PORT || 8080);
+app.listen(listenPort, () => console.log(`🌐 Gateway escuchando en el puerto ${listenPort}`));
+
