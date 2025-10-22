@@ -85,7 +85,8 @@ app.post("/api/inventory/confirm", async (req, res) => {
   res.json({ ok: true });
 });
 
-const PORT = Number(process.env.INVENTORY_PORT || 8080);
+const PORT = Number(process.env.PORT || 8080);
+
 
 (async () => {
   try {
